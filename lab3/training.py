@@ -11,14 +11,12 @@ from dataset.dataset import CityScapesDataset
 #from demo_test_utils.dataset import CityScapesDataset
 from dataset.augmentation import get_composed_augmentations
 from utils.core_utils import *
-
 from utils.metric import runningScore, averageMeter
 
 from tensorboardX import SummaryWriter
 from model.FCN import FCN
 from model.UNet import UNet
 from loss import cross_entropy2d
-
 import numpy as np
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
@@ -32,7 +30,7 @@ def train(epoch, data_loader, Net, optimizer, loss_fn, log_file, Meter, writer):
 		##yourself
 		pred = Net(data)
 		# loss function
-		loss   = loss_fn(pred,target)
+		loss = loss_fn(pred,target)
 		optimizer.zero_grad()  
 		# do back propagation
 		loss.backward()
