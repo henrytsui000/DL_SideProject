@@ -2,4 +2,4 @@
 *.jpg
 *.png
 .DS_Store
-Implement_CNN_from_Numpy/runs
+Implement_CNN_from_Numpy/runs/
