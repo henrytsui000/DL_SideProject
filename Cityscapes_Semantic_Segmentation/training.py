@@ -73,7 +73,6 @@ if __name__ == '__main__':
 	parser.add_argument('-b','--batchsize',   type=int,            default=4,          help='input batch size')
 	parser.add_argument('-e','--epoch',       type=int,            default=10,        help='number of epochs')
 	parser.add_argument('-i','--img-size',    nargs='+', type=int, default=[256,512], help='resize to imgsize')
-	parser.add_argument('-m','--model-name',  type=str,            default='model',    help='for name of save model')
 	parser.add_argument('-o','--output-path', type=str,            default='log',      help='output directory(including log and savemodel)')
 	parser.add_argument('-r','--resume',      type=str,            default=None,       help='the file name of checkpoint you want to resume')
 	parser.add_argument('-t','--task',        type=str,            default='cat',      help='the training task: cat')
@@ -82,7 +81,6 @@ if __name__ == '__main__':
 	batchsize   = opt.batchsize*len(os.environ["CUDA_VISIBLE_DEVICES"].split(','))
 	Epoch       = opt.epoch
 	img_size    = tuple(opt.img_size)
-	model_name  = opt.model_name
 	output_path = opt.output_path
 	resume      = opt.resume
 	task        = opt.task

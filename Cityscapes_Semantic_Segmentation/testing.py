@@ -11,10 +11,7 @@ from utils.core_utils import *
 from torch.utils.data import DataLoader
 from utils.metric import runningScore
 from dataset.dataset import CityScapesDataset
-
-# from loss import ClassNameOf loss
 from model.UNet import UNET
-# from model.ModelFileName import ClassNameOfModel
 
 def test(data_loader, Net, loss_fn, log_file, vis_path, testing_score, task):
     Net.eval()
@@ -92,20 +89,14 @@ if __name__ == '__main__':
     TestingDataset = CityScapesDataset('data','testing',img_size,task=task)
     TestingLoader  = DataLoader(TestingDataset,batch_size=1,shuffle=False)
 
-
-    # define yout model
-    # Net = ?????????????????\
     Net = UNET(testing=True)
     Net = Net.cuda()
-    # Net = torch.nn.DataParallel(Net)
     
     Net, _, _ = load_model(Net, None, model_ckpt, log_file)
     Net = Net.to(device)
     print_with_write(log_file,'Done!')
 
-    # define your loss
     loss_fn = torch.nn.CrossEntropyLoss(ignore_index=255)
-
 
     test(TestingLoader, Net, loss_fn, log_file, vis_path, testing_score, task)
     print_with_write(log_file,str(datetime.datetime.now()))
