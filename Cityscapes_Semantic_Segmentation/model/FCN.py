@@ -77,7 +77,7 @@ class FCN(nn.Module):
 		out = self.deconv2(out)
 		out = self.deconv3(out)
 		out = self.deconv4(out)
-		#out = self.classifier(out)
+		
 		if self.testing is True:
 			out = F.interpolate(out, scale_factor=4)
 		out = self.classifier(out)                    
