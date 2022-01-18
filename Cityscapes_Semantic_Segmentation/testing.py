@@ -13,7 +13,7 @@ from utils.metric import runningScore
 from dataset.dataset import CityScapesDataset
 
 # from loss import ClassNameOf loss
-from model.UNET import UNET
+from model.UNet import UNET
 # from model.ModelFileName import ClassNameOfModel
 
 def test(data_loader, Net, loss_fn, log_file, vis_path, testing_score, task):
