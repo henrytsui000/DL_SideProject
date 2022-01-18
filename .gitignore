@@ -1,5 +1,5 @@
 *.jpeg
 *.jpg
 *.png
-.DS_Store
+*.DS_Store
 Implement_CNN_from_Numpy/runs/
