@@ -3,10 +3,6 @@ from .layer import *
 class Network(object):
     def __init__(self):
 
-        ## by yourself .Finish your own NN framework
-        ## Just an example.You can alter sample code anywhere. 
-        ## Just an example.You can alter sample code anywhere.
-
         self.conv1 = Conv2d(fil_num = 7, fil_size = 5, channel_num = 1) 
         self.relu1 = Leaky_ReLU()
         self.pool1 = AvgPool(fil_size = 2, stride = 2) 
@@ -46,8 +42,8 @@ class Network(object):
         conv2 = self.conv2.forward(pool1)
         act2 = self.relu2.forward(conv2)
         pool2 = self.pool2.forward(act2)
-        self.pool2_shape = pool2.shape #Need it in backpropagation.
-        pool2_flatten = pool2.reshape(self.pool2_shape[0], -1) #(500*1024)
+        self.pool2_shape = pool2.shape
+        pool2_flatten = pool2.reshape(self.pool2_shape[0], -1)
 
 
         h1 = self.fc1.forward(pool2_flatten)
@@ -64,7 +60,7 @@ class Network(object):
         return pred, loss
 
     def backward(self):
-        ## by yourself .Finish your own NN framework
+        
         loss_grad = self.loss.backward(self.target)
         h4_grad = self.fc4.backward(loss_grad)
         a3_grad = self.act3.backward(h4_grad)
@@ -84,23 +80,7 @@ class Network(object):
 
 
     def update(self, lr):
-        ## by yourself .Finish your own NN framework
-        '''
-        self.fc1.weight -= lr * self.fc1.weight_grad
-        self.fc1.bias -= lr * self.fc1.bias_grad
-        self.fc2.weight -= lr * self.fc2.weight_grad
-        self.fc2.bias -= lr * self.fc2.bias_grad
-        self.fc3.weight -= lr * self.fc3.weight_grad
-        self.fc3.bias -= lr * self.fc3.bias_grad
-        self.fc4.weight -= lr * self.fc4.weight_grad
-        self.fc4.bias -= lr * self.fc4.bias_grad
-        self.fc5.weight -= lr * self.fc5.weight_grad
-        self.fc5.bias -= lr * self.fc5.bias_grad
-        self.fc6.weight -= lr * self.fc6.weight_grad
-        self.fc6.bias -= lr * self.fc6.bias_grad
-        self.fc7.weight -= lr * self.fc7.weight_grad
-        self.fc7.bias -= lr * self.fc7.bias_grad
-        '''
+        
         self.optim1.update(self.fc1,lr)
         self.optim2.update(self.fc2,lr)
         self.optim3.update(self.fc3,lr)
