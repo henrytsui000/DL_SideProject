@@ -1,8 +1,5 @@
 import numpy as np
 
-## by yourself .Finish your own NN framework
-## Just an example.You can alter sample code anywhere. 
-
 
 class _Layer(object):
     def __init__(self):
@@ -10,25 +7,22 @@ class _Layer(object):
 
     def forward(self, *input):
         r"""Define the forward propagation of this layer.
-
         Should be overridden by all subclasses.
         """
         raise NotImplementedError
 
     def backward(self, *output_grad):
         r"""Define the backward propagation of this layer.
-
         Should be overridden by all subclasses.
         """
         raise NotImplementedError
         
-## by yourself .Finish your own NN framework
+
 class FullyConnected(_Layer):
     def __init__(self, in_features, out_features):
         self.weight = np.random.randn(in_features, out_features) * 0.01
         self.bias = np.zeros((1, out_features))
         self.input = np.empty([])
-
         self.weight_grad = np.empty([])
         self.bias_grad = np.empty([])
 
@@ -41,64 +35,28 @@ class FullyConnected(_Layer):
         input_grad = np.dot(output_grad, self.weight.T)
         self.weight_grad = (np.dot(self.input.T, output_grad))
         self.bias_grad = output_grad.mean(axis=0)
-
         return input_grad
 
-## by yourself .Finish your own NN framework
-'''class ACTIVITY1(_Layer):
-    def __init__(self):
-        pass
-
-    def forward(self, input):
-        
-
-        
-
-        return output
-
-    def backward(self, ):
-        
-        
-
-        return '''
 
 class SoftmaxWithloss(_Layer):
     def __init__(self):
         self.predict = np.empty([])
         
-
     def forward(self, input, target):
-        
-
         '''Softmax'''     
-        '''
-        exp_reg = np.empty([]) 
-        for i in range(len(input)):
-            
-            exp_reg = np.exp(input[i] - np.max(input[i]))
-            
-            np.append(self.predict, (exp_reg / np.sum(exp_reg)))
-            #print(type(self.predict))
-        print(self.predict)
-                            '''
         for i in range(len(input)):
             dummy = np.exp(input[i]-np.max(input[i]))
             input[i] = dummy / np.sum(dummy)
         self.predict = input
-        #print(self.predict)
-        #predict = [np.exp(x[i]) / np.sum(np.exp(x[i]), axis=0) for i in range(len(x))]
 
         '''Average loss'''
         col = target.shape[0]
-        
         sum_reg = -np.log(self.predict)*target
         your_loss = np.sum(sum_reg) / col
-
         return self.predict, your_loss
 
     def backward(self, target):
         input_grad = self.predict - target 
-
         return input_grad
 
 class Leaky_ReLU(_Layer):
@@ -113,7 +71,6 @@ class Leaky_ReLU(_Layer):
 
     def backward(self, output_grad):
         output_grad[self.input<0] *= 0.01
-        
         return output_grad
 
 class Sigmoid(_Layer):
@@ -140,40 +97,31 @@ class Adam(_Layer):
     def update(self, fc_obj, lr):
         self.m_wgrad = self.b1*self.m_wgrad + (1-self.b1)*fc_obj.weight_grad
         self.m_bgrad = self.b1*self.m_bgrad + (1-self.b1)*fc_obj.bias_grad
-        
         self.v_wgrad = self.b2*self.v_wgrad + (1-self.b2)*(fc_obj.weight_grad**2)
         self.v_bgrad = self.b2*self.v_bgrad + (1-self.b2)*(fc_obj.bias_grad**2)
-        
+
         m_wgrad_corr = self.m_wgrad / (1 - (self.b1**self.t))
         m_bgrad_corr = self.m_bgrad / (1 - (self.b1**self.t))
         v_wgrad_corr = self.v_wgrad / (1 - (self.b2**self.t))
         v_bgrad_corr = self.v_bgrad / (1 - (self.b2**self.t))
         
-        #mutable -> call by reference
         fc_obj.weight -= lr*(m_wgrad_corr/(np.sqrt(v_wgrad_corr)+self.eps))
         fc_obj.bias -= lr*(m_bgrad_corr/(np.sqrt(v_bgrad_corr)+self.eps))
-        
         self.t += 1
 
 def get_indices(X_shape, input_H, input_W, stride, pad):
-
     m, column_num, height, weight = X_shape
-
     output_h = int((height + 2 * pad - input_H) / stride) + 1
     output_w = int((weight + 2 * pad - input_W) / stride) + 1
-
-
     level1 = np.repeat(np.arange(input_H), input_W)
     level1 = np.tile(level1, column_num)
     everyLevels = stride * np.repeat(np.arange(output_h), output_w)
     i = level1.reshape(-1, 1) + everyLevels.reshape(1, -1)
 
-    
     tile1 = np.tile(np.arange(input_W), input_H)
     tile1 = np.tile(tile1, column_num)
     everySlides = stride * np.tile(np.arange(output_w), output_h)
     j = tile1.reshape(-1, 1) + everySlides.reshape(1, -1)
-
     d = np.repeat(np.arange(column_num), input_H * input_W).reshape(-1, 1)
 
     return i, j, d
@@ -263,11 +211,9 @@ class AvgPool():
     def forward(self, X):
         
         m, X_C, X_H, X_W = X.shape
-        
         column_num = X_C
         height = int((X_H - self.f)/ self.s) + 1
         width = int((X_W - self.f)/ self.s) + 1
-
         A_pool = np.zeros((m, column_num, height, width))
 
         for i in range(m):
@@ -275,15 +221,12 @@ class AvgPool():
                 for h in range(height):
                     h_start = h * self.s
                     h_end = h_start + self.f
-                    
                     for w in range(width):
                         w_start = w * self.s
                         w_end = w_start + self.f
-                        
                         A_pool[i, j, h, w] = np.mean(X[i, j, h_start:h_end, w_start:w_end])
         
         self.reg = X
-
         return A_pool
 
     def backward(self, output_grad):
@@ -293,9 +236,7 @@ class AvgPool():
         input_grad = np.zeros(X.shape)        
 
         for i in range(m):
-            
             for c in range(n_C):
-
                 for h in range(n_H):
                     h_start = h * self.s
                     h_end = h_start + self.f
