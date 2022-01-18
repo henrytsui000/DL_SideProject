@@ -8,7 +8,6 @@ import torch.optim as optim
 from math import ceil
 from torch.utils.data import DataLoader
 from dataset.dataset import CityScapesDataset
-#from demo_test_utils.dataset import CityScapesDataset
 from dataset.augmentation import get_composed_augmentations
 from utils.core_utils import *
 from utils.metric import runningScore, averageMeter
@@ -16,7 +15,6 @@ from utils.metric import runningScore, averageMeter
 from tensorboardX import SummaryWriter
 from model.FCN import FCN
 from model.UNet import UNet
-from loss import cross_entropy2d
 import numpy as np
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "0,1,2,3"
