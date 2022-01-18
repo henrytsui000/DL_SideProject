@@ -13,7 +13,6 @@ from utils.core_utils import *
 from utils.metric import runningScore, averageMeter
 
 from tensorboardX import SummaryWriter
-from model.FCN import FCN
 from model.UNet import UNet
 import numpy as np
 
