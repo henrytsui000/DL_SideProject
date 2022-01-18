@@ -14,6 +14,8 @@ We are students of the Department of Electronic and Computer Engineering of Nati
 
 ## TOPICS
 
+### Implement CNN from Numpy
+
 ### Skin Disease Detection
 
 The side project which use RESNET18 to classification Skin Disease.
