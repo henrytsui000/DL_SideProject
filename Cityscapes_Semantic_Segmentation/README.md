@@ -1,7 +1,8 @@
 # Project 03: Cityscapes Semantic Segmentation 
 ## What is semantic segmentation?
-Semantic segmentation is a task which we want to cluster parts of an image together of same object class. It can be viewed as a pixel-level prediction task since each pixlel is classified according to a category. 
 
+![alt text](https://www.cityscapes-dataset.com/wordpress/wp-content/uploads/2015/07/koeln00.png)
+Semantic segmentation is a task which we want to cluster parts of an image together of same object class. It can be viewed as a pixel-level prediction task since each pixlel is classified according to a category. 
 
 ## Dataset
 We are using [Cityscapes Dataset](https://www.cityscapes-dataset.com/) in this project. Please download the data [here]() and store it in folder dataset.
