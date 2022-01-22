@@ -21,4 +21,4 @@ $pip install -r requirements.txt
 ## Final Result
 |Methods |Accuracy
 |-|-|
-|CNN|98.53%|
+|CNN wth FC-Layer|98.53%|
