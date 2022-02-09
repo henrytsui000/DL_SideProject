@@ -1,20 +1,32 @@
-# Some Deep Learning Research
+# Project 02: Skin Disease Detection
 
-We are students of the Department of Electronic and Computer Engineering of National Yang Ming Chiao Tung University, we have selected several machine learning topics as side projects
+## Introduction
 
-## members
+Skin Diseases may cause by different Virus, our target is 
+**seprate different Skin Diseases** by ResNet18(Implement by us or Pytorch)
+Another challenge is our dataset are unbalanced, thus it's easy to overfitting
+## Enviroment
+- Model : RESNET18
+- Dataset : From Kaggle
 
-### 崔浩堂
-[GitHub Link](https://github.com/henrytsui000)
-### 賴奕澄
-[GitHub Link](https://github.com/LaiEthanLai)
-### 王辰祐
-[GitHub Link](https://github.com/SamWang0807)
+To set up enviroment
+```bash
+$pip install -r ./requirements.txt
+```
 
+## Method
 
-## TOPICS
+### Implement
+Use Pytorch's Convolution block make small block, and stack small block to resnet18.
 
-### Skin Disease Detection
+### Pytorch
+Just call the command(but we'll compare the model with pretrained or not)
+## Data Distributed
 
-The side project which use RESNET18 to classification Skin Disease.
-The data set is very uneven and the amount of data is small.
+![](https://i.imgur.com/z67mkvY.png)
+
+## Final Result
+|Methods |Train Accuracy|Validation Accuracy|
+|-|-|-|
+|Non-pretrained Model|82.81%|72.62%|
+|Pretrained Model|93.76%|88.5%|
