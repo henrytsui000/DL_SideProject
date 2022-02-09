@@ -1,4 +1,4 @@
-# Network Pruning
+# Project 04: Network Pruning
 
 ## Introduction
 
